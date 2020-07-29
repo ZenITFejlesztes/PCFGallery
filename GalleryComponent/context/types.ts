@@ -1,0 +1,8 @@
+export const INIT_ARRAY = "INIT_ARRAY"
+export const INVALID_INPUT = "INVALID_INPUT"
+export const NEW_SEARCH = "NEW_SEARCH"
+export const SORT_DISPLAY = "SORT_DISPLAY"
+export const SET_SORT = "SET_SORT"
+export const SET_SELECTED = "SET_SELECTED"
+export const UPDATE_SELECTED = "UPDATE_SELECTED"
+export const SHOW_DETAILS = "SHOW_DETAILS"
