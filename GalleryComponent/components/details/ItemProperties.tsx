@@ -9,8 +9,8 @@ interface IProps {
 const ItemProperties = ({ entry }:IProps) => {
     return (
         <Container>
-            <h4> {entry[0].toUpperCase()} </h4>
-            <p> {entry[1]} </p>
+            <h4 style={{textAlign: "left"}} > {entry[0].toUpperCase()} </h4>
+            <p style={{textAlign: "right"}} > {entry[1]} </p>
         </Container>
     )
 }
@@ -18,12 +18,11 @@ const ItemProperties = ({ entry }:IProps) => {
 export default ItemProperties
 
 const Container = styled.div`
-    padding: .2em;
+    padding: .2em 2em;
     background: #3d3d3d;
     color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 `

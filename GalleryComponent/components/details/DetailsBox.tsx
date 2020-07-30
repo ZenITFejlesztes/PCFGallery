@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 
 import styled from "styled-components"
 
-import {AiFillCloseCircle} from "react-icons/ai"
+import {AiOutlineClose} from "react-icons/ai"
 
 import CollectionContext from "../../context/collectionContext/collectionContext"
 
@@ -23,7 +23,7 @@ const DetailsBox = () => {
                 placeItems: "center"
             }}
             >
-                <AiFillCloseCircle
+                <AiOutlineClose
                 color="white"
                 size="3em"
                 cursor="pointer"

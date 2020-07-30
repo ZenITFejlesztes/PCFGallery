@@ -5,6 +5,12 @@ export const checkValueProp = (input: any, errorMessage: string = "wrong type"):
     if (input?.result && typeof input?.result === "string") return input.result;
     if (input?.Result && typeof input?.Result === "string") return input.Result;
     if (typeof input == "number") return input + "";
+    // check for boolean
+    if (typeof input == "boolean") {
+        let boolStr: string;
+        input === true ? (boolStr = "true") : (boolStr = "false");
+        return boolStr;
+    }
     return errorMessage;
 };
 
@@ -28,6 +34,24 @@ export const getColumnEntries = (columnName: string, inpArr: any[]): string[] =>
         newValue = origiEntry[1];
         return [...outArr, newValue];
     }, []);
+};
+
+// given an object turns it into a one deep object of strings
+export const objectToDisplay = (inputObject: any) => {
+    const entries = Object.entries<any>(inputObject).map<[string, string]>((entry) =>
+        typeof entry[1] === "string" ? entry : [entry[0], checkValueProp(entry[1])]
+    );
+    let respObject = { ...inputObject };
+    Object.keys(inputObject).forEach((key) => {
+        const val = entries.find(entry => entry[0] === key) || [key, "wrong type"]
+        Object.defineProperty(respObject, key, {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: val[1]
+        });
+    });
+    return respObject
 };
 
 // gets all the available column names

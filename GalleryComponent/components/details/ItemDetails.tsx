@@ -5,14 +5,16 @@ import styled from "styled-components"
 import ItemProperties from "./ItemProperties"
 import CollectionContext from "../../context/collectionContext/collectionContext" 
 
+import { objectToDisplay } from "../../utils/logic/tableManipulation"
+
 const ItemDetails = () => {
     const { selectedItem } = useContext(CollectionContext)
-    const initialEntries = Object.entries<any>(selectedItem)
+    const initialEntries = Object.entries<any>(objectToDisplay(selectedItem))
 
     const [entries, setentries] = useState(initialEntries)
 
     useEffect(() => {
-        setentries(Object.entries<any>(selectedItem))
+        setentries(Object.entries<any>(objectToDisplay(selectedItem)))
     }, [selectedItem])
 
     return (
@@ -27,7 +29,7 @@ const ItemDetails = () => {
 export default ItemDetails
 
 const ScrollContainer = styled.div`
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 85%;
     width: 80%;
     ::-webkit-scrollbar {
@@ -46,7 +48,4 @@ const ScrollContainer = styled.div`
 const MainContainer = styled.div`
     background: #e2e2e2dd;
     padding: 2em;
-    display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(40%, 1fr) );
-    grid-gap: 1em;
 `
