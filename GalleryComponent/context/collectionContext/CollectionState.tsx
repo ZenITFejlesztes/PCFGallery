@@ -20,6 +20,9 @@ import {
 import { findStringInObject, checkValueProp } from "../../utils/logic/tableManipulation";
 
 const CollectionState = (props) => {
+    //  if at any point the selectedItem is null or undefined the TS throws a casting error
+    const selectedItemFallbackValue = {noValue:"-"}
+
     const initialState: StateInterface = {
         inputArray: [],
         inputColumns: [],
@@ -30,9 +33,10 @@ const CollectionState = (props) => {
         sortColumn: "",
         sortDirection: true,
         selectedId: -1,
-        selectedItem: undefined,
+        selectedItem: selectedItemFallbackValue,
         showDetails: false,
     };
+    
 
     const [state, dispatch] = useReducer(CollectionReducer, initialState);
 
@@ -122,7 +126,7 @@ const CollectionState = (props) => {
                 type: SET_SELECTED,
                 payload: {
                     itemId: itemId,
-                    item: undefined,
+                    item: selectedItemFallbackValue,
                 },
             });
             return;

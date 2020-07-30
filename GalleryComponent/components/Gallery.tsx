@@ -88,7 +88,7 @@ const Gallery = (props) => {
                 ))}
             </ColumnContainer>
 
-            { showDetails && <DetailsBox></DetailsBox> }
+            <DetailsBox visible={showDetails} ></DetailsBox>
         </ContainerDiv>
     );
 };
@@ -124,4 +124,5 @@ const ContainerDiv = styled.div`
     margin: 0px;
     width: calc(100% - 2px);
     height: 100%;
+    overflow: hidden;
 `;

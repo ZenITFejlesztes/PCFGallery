@@ -10,7 +10,6 @@ import { objectToDisplay } from "../../utils/logic/tableManipulation"
 const ItemDetails = () => {
     const { selectedItem } = useContext(CollectionContext)
     const initialEntries = Object.entries<any>(objectToDisplay(selectedItem))
-
     const [entries, setentries] = useState(initialEntries)
 
     useEffect(() => {

@@ -8,10 +8,16 @@ import CollectionContext from "../../context/collectionContext/collectionContext
 
 import ItemDetails from "./ItemDetails"
 
-const DetailsBox = () => {
+interface IProps {
+    visible: boolean
+}
+
+const DetailsBox = ({visible}:IProps ) => {
     const { showSelectedItemDetails } = useContext(CollectionContext)
     return (
-        <MainContainer>
+        <MainContainer
+        visible={visible}
+        >
             <div
             style={{
                 position: "absolute",
@@ -37,6 +43,10 @@ const DetailsBox = () => {
 
 export default DetailsBox
 
+interface MainContainerInterface {
+    visible: boolean;
+}
+
 const MainContainer = styled.div`
     position: absolute;
     top: 0px;
@@ -44,6 +54,9 @@ const MainContainer = styled.div`
     width: 100%;
     height: 100%;
     background: #000c;
+
+    transform: translateY( ${ (props: MainContainerInterface) => props.visible ? "0%" : "-105%" } );
+    transition: transform .3s ease-out;
 
     display: grid;
     place-items: center;
