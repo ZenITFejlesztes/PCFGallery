@@ -6,7 +6,9 @@ import CollectionReducer from "./collectionReducer";
 
 import {
     INIT_ARRAY,
-    INVALID_INPUT,
+    INIT_COLUMNS,
+    INVALID_COLLECTION,
+    INVALID_COLUMNS,
     NEW_SEARCH,
     SORT_DISPLAY,
     SET_SORT,
@@ -20,8 +22,10 @@ import { findStringInObject, checkValueProp } from "../../utils/logic/tableManip
 const CollectionState = (props) => {
     const initialState: StateInterface = {
         inputArray: [],
+        inputColumns: [],
         displayArray: [],
-        validInputs: true,
+        validInputCollection: true,
+        validInputColumns: true,
         searchTerm: "",
         sortColumn: "",
         sortDirection: true,
@@ -37,12 +41,25 @@ const CollectionState = (props) => {
         try {
             const inpArray = JSON.parse(collJSON);
             if (!Array.isArray(inpArray)) {
-                dispatch({ type: INVALID_INPUT });
+                dispatch({ type: INVALID_COLLECTION });
                 return;
             }
             dispatch({ type: INIT_ARRAY, payload: inpArray });
         } catch (error) {
-            dispatch({ type: INVALID_INPUT });
+            dispatch({ type: INVALID_COLLECTION });
+        }
+    };
+
+    const refreshColumns = (inputJSON: string): void => {
+        try {
+            const columns = JSON.parse(inputJSON);
+            if (!columns) {
+                dispatch({ type: INVALID_COLUMNS });
+                return;
+            }
+            dispatch({ type: INIT_COLUMNS, payload: columns });
+        } catch (error) {
+            dispatch({ type: INVALID_COLUMNS });
         }
     };
 
@@ -78,11 +95,11 @@ const CollectionState = (props) => {
             const aString = typeof aValue == "string" ? aValue : checkValueProp(aValue, "-");
             const bString = typeof bValue == "string" ? bValue : checkValueProp(bValue, "-");
             // in case its a numeric string
-            const NumRegExp = new RegExp(/^-{0,1}\d*\.{0,1}\d+$/)
+            const NumRegExp = new RegExp(/^-{0,1}\d*\.{0,1}\d+$/);
             if (NumRegExp.test(aString) && NumRegExp.test(bString)) {
-                const aNum = parseInt(aString)
-                const bNum = parseInt(bString)
-                return sortDirection ? aNum - bNum : bNum - aNum
+                const aNum = parseInt(aString);
+                const bNum = parseInt(bString);
+                return sortDirection ? aNum - bNum : bNum - aNum;
             }
             // in case its NOT a numeric string
             const order = aString.localeCompare(bString, "hu");
@@ -106,18 +123,18 @@ const CollectionState = (props) => {
                 payload: {
                     itemId: itemId,
                     item: undefined,
-                }
+                },
             });
             return;
         }
         const item = state.displayArray[itemId];
-        dispatch({ type: SET_SELECTED, payload: { itemId, item }});
+        dispatch({ type: SET_SELECTED, payload: { itemId, item } });
     };
 
     const updateSelectedItem = () => {
-        const itemId = state.displayArray.findIndex(item => item == state.selectedItem)
-        dispatch({ type: UPDATE_SELECTED, payload: itemId })
-    }
+        const itemId = state.displayArray.findIndex((item) => item == state.selectedItem);
+        dispatch({ type: UPDATE_SELECTED, payload: itemId });
+    };
 
     const showSelectedItemDetails = (val: boolean) =>
         dispatch({ type: SHOW_DETAILS, payload: val });
@@ -126,8 +143,10 @@ const CollectionState = (props) => {
         <CollectionContext.Provider
             value={{
                 inputArray: state.inputArray,
+                inputColumns: state.inputColumns,
                 displayArray: state.displayArray,
-                validInputs: state.validInputs,
+                validInputCollection: state.validInputCollection,
+                validInputColumns: state.validInputColumns,
                 sortColumn: state.sortColumn,
                 sortDirection: state.sortDirection,
                 selectedId: state.selectedId,
@@ -135,6 +154,7 @@ const CollectionState = (props) => {
                 showDetails: state.showDetails,
                 sortItems,
                 refreshArray,
+                refreshColumns,
                 searchItems,
                 setSortParams,
                 setSelectedItem,

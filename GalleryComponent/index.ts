@@ -70,10 +70,12 @@ export class GalleryComponent implements ComponentFramework.StandardControl<IInp
     private refreshInputs(): void {
         this.iinputs = {
             collJSON: this.context.parameters.collJSON || this.iinputs.collJSON,
+            columnNames: this.context.parameters.columnNames || this.iinputs.columnNames,
             maxFontSize: this.context.parameters.maxFontSize || this.iinputs.maxFontSize
         }
         this.inputs = {
-            collJSON: this.iinputs.collJSON.raw || this.inputs.collJSON
+            collJSON: this.iinputs.collJSON.raw || this.inputs.collJSON,
+            columnNames: this.iinputs.columnNames.raw || this.inputs.columnNames
         }
         this.maxFontsize = this.iinputs.maxFontSize.raw || this.maxFontsize
 

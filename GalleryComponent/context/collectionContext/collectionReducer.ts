@@ -3,7 +3,9 @@ import {StateInterface} from "./stateInterface"
 
 import {
     INIT_ARRAY,
-    INVALID_INPUT,
+    INIT_COLUMNS,
+    INVALID_COLLECTION,
+    INVALID_COLUMNS,
     NEW_SEARCH,
     SORT_DISPLAY,
     SET_SORT,
@@ -18,12 +20,23 @@ export default function (state: StateInterface, action): StateInterface {
             return {
                 ...state,
                 inputArray: action.payload,
-                validInputs: true
+                validInputCollection: true
             }
-        case INVALID_INPUT:
+        case INIT_COLUMNS: 
+        return {
+            ...state,
+            inputColumns: action.payload,
+            validInputColumns: true
+        }
+        case INVALID_COLLECTION:
             return {
                 ...state,
-                validInputs: false
+                validInputCollection: false
+            }
+        case INVALID_COLUMNS:
+            return {
+                ...state,
+                validInputColumns: false
             }
         case NEW_SEARCH:
             return {

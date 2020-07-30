@@ -1,7 +1,9 @@
 export interface StateInterface {
     inputArray: Array<any>;
+    inputColumns: Array<any>;
     displayArray: Array<any>;
-    validInputs: boolean;
+    validInputCollection: boolean;
+    validInputColumns: boolean;
     searchTerm: string;
     sortColumn: string;
     sortDirection: boolean;
@@ -12,8 +14,10 @@ export interface StateInterface {
 
 export interface ContextIntercace {
     inputArray: Array<any>;
+    inputColumns: Array<any>;
     displayArray: Array<any>;
-    validInputs: boolean;
+    validInputCollection: boolean;
+    validInputColumns: boolean;
     sortColumn: string;
     sortDirection: boolean;
     selectedId: number;
@@ -23,6 +27,7 @@ export interface ContextIntercace {
     updateSelectedItem: () => void;
     sortItems: () => void;
     refreshArray: (collJSON: string) => void;
+    refreshColumns: (inputJSON: string) => void;
     searchItems: (newTerm: string) => void;
     setSortParams: (column: string, order: boolean) => void;
     showSelectedItemDetails: (val: boolean) => void;

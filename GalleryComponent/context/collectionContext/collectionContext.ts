@@ -5,10 +5,13 @@ import {ContextIntercace} from "./stateInterface"
 const CollectionContext = createContext<ContextIntercace>(
     {
         inputArray: [],
+        inputColumns: [],
         displayArray: [],
         refreshArray: () => null,
+        refreshColumns: () => null,
         searchItems: (str: string) => null,
-        validInputs: true,
+        validInputCollection: true,
+        validInputColumns: true,
         sortColumn: "",
         sortDirection: false,
         sortItems: () => null,

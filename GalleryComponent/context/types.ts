@@ -1,5 +1,7 @@
 export const INIT_ARRAY = "INIT_ARRAY"
-export const INVALID_INPUT = "INVALID_INPUT"
+export const INIT_COLUMNS = "INIT_COLUMNS"
+export const INVALID_COLLECTION = "INVALID_COLLECTION"
+export const INVALID_COLUMNS = "INVALID_COLUMNS"
 export const NEW_SEARCH = "NEW_SEARCH"
 export const SORT_DISPLAY = "SORT_DISPLAY"
 export const SET_SORT = "SET_SORT"

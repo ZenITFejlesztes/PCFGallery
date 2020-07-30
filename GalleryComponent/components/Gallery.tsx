@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import styled from "styled-components";
 
@@ -12,12 +12,15 @@ import DetailsBox from "./details/DetailsBox";
 import { getColumnEntries, getColumns } from "../utils/logic/tableManipulation";
 
 const Gallery = (props) => {
-    const { collJSON } = props.inp;
+    const { collJSON, columnNames } = props.inp;
     const {
         refreshArray,
+        refreshColumns,
         searchItems,
         inputArray,
-        validInputs,
+        inputColumns,
+        validInputCollection,
+        validInputColumns,
         displayArray,
         sortItems,
         sortColumn,
@@ -26,7 +29,9 @@ const Gallery = (props) => {
         updateSelectedItem,
         showDetails
     } = useContext(CollectionContext);
-    const columns = getColumns(inputArray);
+
+
+    //const columns = getColumns(inputArray);
 
     // updates the array every time the inputs have changed
     useEffect(() => {
@@ -47,8 +52,12 @@ const Gallery = (props) => {
         updateSelectedItem();
     }, [ JSON.stringify(displayArray) ]);
 
+    useEffect(() => {
+        refreshColumns(columnNames)
+    }, [columnNames])
+
     // displaying error for invalid inputs
-    if (!validInputs)
+    if (!validInputCollection || !validInputColumns)
         return (
             <h1
                 style={{
@@ -68,12 +77,12 @@ const Gallery = (props) => {
             <SearchBar></SearchBar>
 
             <ColumnContainer>
-                {columns.map((col, index) => (
+                {inputColumns.map((col, index) => (
                     <Column
                         key={col}
                         columnName={col}
                         columnValues={getColumnEntries(col, displayArray)}
-                        columnCount={columns.length}
+                        columnCount={inputColumns.length}
                         firstColumn={ index === 0 }
                     ></Column>
                 ))}

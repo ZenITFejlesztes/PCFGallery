@@ -2,6 +2,7 @@ import {IInputs, IOutputs} from "./generated/ManifestTypes"
 
 export interface RInputs {
     collJSON: string;
+    columnNames: string;
 }
 
 export interface ROutputs {
