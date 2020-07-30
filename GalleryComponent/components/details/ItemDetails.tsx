@@ -47,5 +47,5 @@ const ScrollContainer = styled.div`
 
 const MainContainer = styled.div`
     background: #e2e2e2dd;
-    padding: 2em;
+    padding: 1em 2em;
 `
