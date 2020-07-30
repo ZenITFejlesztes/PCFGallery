@@ -26,7 +26,8 @@ const DetailsBox = ({visible}:IProps ) => {
                 width: "7em",
                 height: "4em",
                 display: "grid",
-                placeItems: "center"
+                placeItems: "center",
+                cursor: "pointer"
             }}
             onClick={ () => showSelectedItemDetails(false) }
             >
