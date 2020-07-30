@@ -23,7 +23,7 @@ const DetailsBox = ({visible}:IProps ) => {
                 position: "absolute",
                 top: "0px",
                 right: "0px",
-                width: "5em",
+                width: "7em",
                 height: "4em",
                 display: "grid",
                 placeItems: "center"
@@ -31,7 +31,7 @@ const DetailsBox = ({visible}:IProps ) => {
             >
                 <AiOutlineClose
                 color="white"
-                size="3em"
+                size="3.5em"
                 cursor="pointer"
                 onClick={ () => showSelectedItemDetails(false) }
                 />

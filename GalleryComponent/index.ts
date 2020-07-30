@@ -74,8 +74,8 @@ export class GalleryComponent implements ComponentFramework.StandardControl<IInp
             maxFontSize: this.context.parameters.maxFontSize || this.iinputs.maxFontSize
         }
         this.inputs = {
-            collJSON: this.iinputs.collJSON.raw || this.inputs.collJSON,
-            columnNames: this.iinputs.columnNames.raw || this.inputs.columnNames
+            collJSON: this.iinputs.collJSON.raw || "[]",
+            columnNames: this.iinputs.columnNames.raw || "[]"
         }
         this.maxFontsize = this.iinputs.maxFontSize.raw || this.maxFontsize
 

@@ -47,6 +47,7 @@ const CustInp = styled.input`
     border: 0px;
     left: 0px;
     top: 0px;
+    background: white;
 
     width: 40%;
     min-width: 220px;
