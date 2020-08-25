@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 import styled from "styled-components";
 
 import CollectionContext from "../context/collectionContext/collectionContext";
-import { RInputs } from "../inputInterfaces";
 
-import Column from "./columns/Column";
 import SearchBar from "./search/SearchBar";
 import DetailsBox from "./details/DetailsBox";
 
-import { getColumnEntries, getColumns } from "../utils/logic/tableManipulation";
+import Headers from "./rowLayout/Headers";
+import RowGallery from "./rowLayout/RowGallery";
 
 const Gallery = (props) => {
     const { collJSON, columnNames } = props.inp;
@@ -27,9 +26,8 @@ const Gallery = (props) => {
         sortDirection,
         setSelectedItem,
         updateSelectedItem,
-        showDetails
+        showDetails,
     } = useContext(CollectionContext);
-
 
     //const columns = getColumns(inputArray);
 
@@ -44,17 +42,17 @@ const Gallery = (props) => {
     }, [inputArray]);
 
     useEffect(() => {
-        sortItems()
+        sortItems();
     }, [sortColumn, sortDirection]);
 
     // THIS IS A HUGE CHEAT!
     useEffect(() => {
         updateSelectedItem();
-    }, [ JSON.stringify(displayArray) ]);
+    }, [JSON.stringify(displayArray)]);
 
     useEffect(() => {
-        refreshColumns(columnNames)
-    }, [columnNames])
+        refreshColumns(columnNames);
+    }, [columnNames]);
 
     // displaying error for invalid inputs
     if (!validInputCollection || !validInputColumns)
@@ -75,47 +73,14 @@ const Gallery = (props) => {
     return (
         <ContainerDiv>
             <SearchBar></SearchBar>
-
-            <ColumnContainer>
-                {inputColumns.map((col, index) => (
-                    <Column
-                        key={col}
-                        columnName={col}
-                        columnValues={getColumnEntries(col, displayArray)}
-                        columnCount={inputColumns.length}
-                        firstColumn={ index === 0 }
-                    ></Column>
-                ))}
-            </ColumnContainer>
-
-            <DetailsBox visible={showDetails} ></DetailsBox>
+            <Headers columnNames={inputColumns} />
+            <RowGallery />
+            <DetailsBox visible={showDetails}></DetailsBox>
         </ContainerDiv>
     );
 };
 
 export default Gallery;
-
-// STYLED COMPONENTS
-
-const ColumnContainer = styled.div`
-    height: calc(100% - 3em);
-    width: 100%;
-    overflow-y: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    ::-webkit-scrollbar {
-        width: 0.5rem;
-    }
-    ::-webkit-scrollbar-thumb {
-        background-color: gray;
-        box-shadow: inset 0px 0px 3px white;
-    }
-    ::-webkit-scrollbar-track {
-        background-color: #f8f8f8;
-        box-shadow: inset 0px 0px 3px black;
-    }
-`;
 
 const ContainerDiv = styled.div`
     position: relative;

@@ -1,9 +1,6 @@
 // helper for the function below us, checks whether something has a value or Value property and if its a string then returns that
 export const checkValueProp = (input: any, errorMessage: string = "wrong type"): string => {
-    if (input?.value && typeof input?.value === "string") return input.value;
-    if (input?.Value && typeof input?.Value === "string") return input.Value;
-    if (input?.result && typeof input?.result === "string") return input.result;
-    if (input?.Result && typeof input?.Result === "string") return input.Result;
+    if (typeof input == "string") return input;
     if (typeof input == "number") return input + "";
     // check for boolean
     if (typeof input == "boolean") {
@@ -11,6 +8,12 @@ export const checkValueProp = (input: any, errorMessage: string = "wrong type"):
         input === true ? (boolStr = "true") : (boolStr = "false");
         return boolStr;
     }
+    // check for object
+    if (input?.value && typeof input?.value === "string") return input.value;
+    if (input?.Value && typeof input?.Value === "string") return input.Value;
+    if (input?.result && typeof input?.result === "string") return input.result;
+    if (input?.Result && typeof input?.Result === "string") return input.Result;
+    
     return errorMessage;
 };
 
@@ -75,3 +78,10 @@ export const findStringInObject = (inpObj: any, searchText: string) => {
         .filter((val) => val.toLowerCase().includes(searchText.toLowerCase())); // the actual search
     return filteredProps.length > 0;
 };
+
+
+export const getValueStringsFromObject = (inpObj: any, columnNames: string[]): string[] => {
+    let responses = [] as string[];
+    columnNames.forEach(name => responses.push(checkValueProp(inpObj[name])))
+    return responses
+}

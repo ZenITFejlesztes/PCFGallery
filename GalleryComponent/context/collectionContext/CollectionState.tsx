@@ -133,6 +133,7 @@ const CollectionState = (props) => {
         }
         const item = state.displayArray[itemId];
         dispatch({ type: SET_SELECTED, payload: { itemId, item } });
+        showSelectedItemDetails(true)
     };
 
     const updateSelectedItem = () => {

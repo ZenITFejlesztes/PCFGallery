@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 
 import CollectionContext from "../../context/collectionContext/collectionContext";
 
 import styled from "styled-components"
 
 const SearchBar = () => {
-    const { searchItems } = useContext(CollectionContext)
+    const { searchItems, displayArray } = useContext(CollectionContext)
     
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         searchItems(e.currentTarget.value)
@@ -20,6 +20,9 @@ const SearchBar = () => {
             onChange={onInputChange}
             placeholder="Search here..."
             />
+            <TextHolder>
+                <ParText> Entries found: {displayArray.length} </ParText>
+            </TextHolder>
         </BgRect>
     );
 };
@@ -60,5 +63,22 @@ const CustInp = styled.input`
         border: 2px black solid;
         outline: none;
     }
+`
+const TextHolder = styled.div`
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 60%;
+    overflow: hidden;
+`
 
+const ParText = styled.p`
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+    line-height: calc(3em - 2px)
 `
